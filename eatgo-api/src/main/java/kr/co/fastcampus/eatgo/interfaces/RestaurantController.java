@@ -44,4 +44,14 @@ public class RestaurantController {
         System.out.println(location);
         return ResponseEntity.created(location).body("{}");
     }
+
+    @PatchMapping("/restaurants/{id}")
+    public String update(@PathVariable("id") Long id,
+                         @RequestBody Restaurant resource) {
+        String name = resource.getName();
+        String address = resource.getAddress();
+        restaurantService.updateRestaurant(id, name, address);
+
+        return "{}";
+    }
 }
